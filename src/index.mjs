@@ -23,4 +23,16 @@ app.get("/api", function (req, res) {
   });
 });
 
+app.get("/api/:subject", function (req, res) {
+  const { subject } = req.params;
+  res.json(GROUP_NEWS[subject]);
+});
+
+app.get("/api/:subject/:id", function (req, res) {
+  const { subject, id } = req.params;
+  const allNews = GROUP_NEWS[subject];
+  const news = allNews.value.find((el) => el["id"] === id);
+  res.json(news);
+});
+
 app.listen(PORT), () => console.log(`Server API is listening on port ${PORT}`);
